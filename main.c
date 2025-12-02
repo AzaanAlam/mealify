@@ -12,7 +12,7 @@ int BMI() {
     metric = weight / height * height;
     
 }
-
+//changes made by abdullah
 
 int main() {
     int select;
@@ -45,4 +45,5 @@ int main() {
 
 
     }
+
 }

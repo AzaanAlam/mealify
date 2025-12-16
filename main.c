@@ -1,51 +1,141 @@
 #include <stdio.h>
 
-int BMI();
-int BMI() {
-    float weight, height, metric;
+// ABDULLAH //
+// BMI CALCULATOR START //
 
-    printf("----BMI Calculator----\n");
-    printf("Enter your weight: \n");
-    scanf("%f", &weight);
-    printf("Enter your height: \n");
-    scanf("%f", &height);
-    metric = weight / height * height;
-    
+/* Basic data available for use to everyone */
+void userbasicdata(int *age, char *gender, float *weight, float *height, int system) {
+    printf("Enter your gender (M/F): ");
+    scanf(" %c", gender);
+
+    printf("Enter your age: ");
+    scanf("%d", age);
+
+    if (system == 1) {
+        printf("Enter your weight (pounds): ");
+        scanf("%f", weight);
+        printf("Enter your height (inches): ");
+        scanf("%f", height);
+    } else {
+        printf("Enter your weight (kg): ");
+        scanf("%f", weight);
+        printf("Enter your height (meters): ");
+        scanf("%f", height);
+    }
 }
-//changes made by abdullah
-//second change by abdullah
 
-int main() {
-    int select;
-    printf("------MAIN MENU--------\n");
-    printf("Choose an option: \n");
-    printf("1)Budget based recipe suggestions \n");
-    printf("2)Recipe details \n");
-    printf("3)Water Intake Tracker \n");
-    printf("4)Weight Tracker \n");
-    printf("5)BMI Calculator \n");
-    scanf("%d", &select);
-    switch(select) { 
-        case 1:
-        break;
+/* BMI category */
+void BMICategory(float bmi) {
+    if (bmi < 16)
+        printf("BMI Category: Severe Thinness\n");
+    else if (bmi < 17)
+        printf("BMI Category: Moderate Thinness\n");
+    else if (bmi < 18.5)
+        printf("BMI Category: Mild Thinness\n");
+    else if (bmi < 25)
+        printf("BMI Category: Normal\n");
+    else if (bmi < 30)
+        printf("BMI Category: Overweight\n");
+    else if (bmi < 35)
+        printf("BMI Category: Obese Class I\n");
+    else if (bmi < 40)
+        printf("BMI Category: Obese Class II\n");
+    else
+        printf("BMI Category: Obese Class III\n");
+}
 
+/* BMI actual function */
+void BMI(float weight, float height, int system) {
+    float bmi, minWeight, maxWeight;
 
-        case 2:
-        break;
+    printf("\n---- BMI Calculator ----\n");
 
-        case 3:
-        break;
+    if (system == 1) {
+        bmi = 703 * (weight / (height * height));
+        minWeight = (18.5 * height * height) / 703;
+        maxWeight = (25.0 * height * height) / 703;
 
-        case 4:
-        break;
+        printf("BMI: %.2f kg/m^2\n", bmi);
+        printf("Healthy BMI Range: 18.5 - 25 kg/m^2\n");
+        printf("Healthy Weight Range: %.2f lb - %.2f lb\n", minWeight, maxWeight);
+    } 
+    
+    else {
+        bmi = weight / (height * height);
+        minWeight = 18.5 * height * height;
+        maxWeight = 25.0 * height * height;
 
-        case 5:
-
-        break;
-
-
-
+        printf("BMI: %.2f kg/m^2\n", bmi);
+        printf("Healthy BMI Range: 18.5 - 25 kg/m^2\n");
+        printf("Healthy Weight Range: %.2f kg - %.2f kg\n", minWeight, maxWeight);
     }
 
+    BMICategory(bmi);
 }
 
+// BMI CALCULATOR END //
+// ABDULLAH //
+
+int main() {
+    int age;
+    float weight, height;
+    char gender;
+    int select;
+
+    printf("------ MAIN MENU ------\n");
+    printf("1) Budget based recipe suggestions\n");
+    printf("2) Recipe details\n");
+    printf("3) Water Intake Tracker\n");
+    printf("4) Weight Tracker\n");
+    printf("5) BMI Calculator\n");
+    printf("Choose an option: ");
+    scanf("%d", &select);
+
+    switch (select) {
+
+        case 1: {
+            break;
+        }
+
+        case 2: {
+            break;
+        }
+
+        case 3: {
+            break;
+        }
+
+        case 4: {
+            break;
+        }
+
+        // ABDULLAH //
+        // BMI CALCULATOR INSIDE MAIN FUNCTION //
+        case 5: {
+            int system;
+
+            printf("\nChoose measurement system:\n");
+            printf("1) US Customary (pounds & inches)\n");
+            printf("2) Metric (kg & meters)\n");
+            printf("Your choice: ");
+            scanf("%d", &system);
+
+            userbasicdata(&age, &gender, &weight, &height, system);
+
+            if (system == 1) {
+                printf("\nUser Data: %c, %d years, %.2f lb, %.2f inches\n", gender, age, weight, height);
+            }
+            else {
+                printf("\nUser Data: %c, %d years, %.2f kg, %.2f meters\n", gender, age, weight, height);
+            }
+
+            BMI(weight, height, system);
+            break;
+        }
+
+        default:
+            printf("Option not implemented yet.\n");
+    }
+
+    return 0;
+}

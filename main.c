@@ -5,12 +5,33 @@
 
 /* Basic data available for use to everyone */
 void userbasicdata(int *age, char *gender, float *weight, float *height, int system) {
-    printf("Enter your gender (M/F): ");
-    scanf(" %c", gender);
 
-    printf("Enter your age: ");
-    scanf("%d", age);
+    /* Gender check */
+    while (1) {
+        printf("Enter your gender (M/F): ");
+        scanf(" %c", gender);
 
+        if (*gender == 'M' || *gender == 'm' || *gender == 'F' || *gender == 'f') {
+            break;
+
+        } else {
+            printf("Error: Invalid gender. Please enter M or F only.\n");
+        }
+    }
+
+    /* Age check */
+    while (1) {
+        printf("Enter your age: ");
+        scanf("%d", age);
+
+        if (*age > 0) {
+            break;
+        } else {
+            printf("Error: Age must be greater than 0. Please try again.\n");
+        }
+    }
+
+    /* Weight, height input */
     if (system == 1) {
         printf("Enter your weight (pounds): ");
         scanf("%f", weight);
@@ -124,7 +145,8 @@ int main() {
 
             if (system == 1) {
                 printf("\nUser Data: %c, %d years, %.2f lb, %.2f inches\n", gender, age, weight, height);
-            }
+            } 
+            
             else {
                 printf("\nUser Data: %c, %d years, %.2f kg, %.2f meters\n", gender, age, weight, height);
             }

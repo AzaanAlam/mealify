@@ -33,7 +33,7 @@ void getCurrentTimestamp(char *buffer) {
 // Print a styled header
 void printHeader(char *title) {
     printf("\n==========================================\n");
-    printf("        Digital Meal Planning \n");
+    printf("              Mealify                       \n");
     printf("          %s \n", title);
     printf("==========================================\n");
 }
@@ -387,3 +387,4 @@ int main() {
     }
     return 0;
 }
+
